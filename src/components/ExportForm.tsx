@@ -93,6 +93,15 @@ export const ExportForm = () => {
     const mapped = filtered.map((c) => {
       const ncRegex = /NC/;
       const isNC = ncRegex.test(c.cfe);
+      var str_subtotal = isNC ? `-${c.subtotal}` : c.subtotal;
+      str_subtotal = str_subtotal.split(".").join("");
+      str_subtotal = str_subtotal.split(",").join(".");
+      var str_iva = isNC ? `-${c.iva}` : c.iva;
+      str_iva = str_iva.split(".").join("");
+      str_iva = str_iva.split(",").join(".");
+      var str_importe = isNC ? `-${c.importe}` : c.importe;
+      str_importe = str_importe.split(".").join("");
+      str_importe = str_importe.split(",").join(".");
       if (type === 'Compras') {
         return {
           CFE: c.cfe,
@@ -100,9 +109,9 @@ export const ExportForm = () => {
           Numero: c.numero,
           Fecha: c.fecha,
           Cliente: c.cliente,
-          Subtotal: isNC ? `-${c.subtotal}` : c.subtotal,
-          IVA: isNC ? `-${c.iva}` : c.iva,
-          Importe: isNC ? `-${c.importe}` : c.importe,
+          Subtotal: parseFloat(str_subtotal),
+          IVA: parseFloat(str_iva),
+          Importe: parseFloat(str_importe),
           Moneda: c.moneda,
           TipoPago: c.tipoPago,
         };
@@ -113,9 +122,9 @@ export const ExportForm = () => {
         Numero: c.numero,
         Fecha: c.fecha,
         Cliente: c.cliente,
-        Subtotal: isNC ? `-${c.subtotal}` : c.subtotal,
-        IVA: isNC ? `-${c.iva}` : c.iva,
-        Importe: isNC ? `-${c.importe}` : c.importe,
+        Subtotal: parseFloat(str_subtotal),
+        IVA: parseFloat(str_iva),
+        Importe: parseFloat(str_importe),
         Moneda: c.moneda,
         TipoPago: c.tipoPago,
       };
