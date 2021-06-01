@@ -18,7 +18,7 @@ export const TableStyle = styled.div<TableStyleProps>`
     font-weight: bold;
   }
   .ant-table-tbody > tr.ant-table-row:hover > td {
-    background: #e1e1e1;
+    background: #e1e1e2;
   }
   .ant-table-tbody > tr.ant-table-row:nth-child(odd) {
     background-color: #d0d0d0;
