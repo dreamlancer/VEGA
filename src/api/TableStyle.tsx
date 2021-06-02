@@ -21,7 +21,7 @@ export const TableStyle = styled.div<TableStyleProps>`
     background: #e1e1e1;
   }
   .ant-table-tbody > tr.ant-table-row:nth-child(odd) {
-    background-color: #d0d0d0;
+    background-color: #E8F3FF;
   }
   .waiting {
     td:last-child {
