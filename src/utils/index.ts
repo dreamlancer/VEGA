@@ -24,3 +24,7 @@ export function round(value: number) {
 export function roundToFour(value: number) {
   return Math.round((value + Number.EPSILON) * 10000) / 10000;
 }
+
+export function showToFour(value : number) {
+  return Math.floor((value + Number.EPSILON) * 10000) / 10000;
+}

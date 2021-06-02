@@ -26,7 +26,7 @@ import {
   onlyNumbersRegex,
 } from 'constants/regex';
 import moment from 'moment';
-import { formatImporte, round, roundToFour } from 'utils';
+import { formatImporte, round, roundToFour, showToFour} from 'utils';
 import { getInterbancario } from 'store/app';
 import { updateRemaining, postDocumentThunk, setPostState } from 'store/docs';
 import { updatePreferences } from 'store/preferences';
@@ -206,8 +206,12 @@ export const DocumentForm = () => {
         ...line,
         precio:
           line.precio && Number(line.precio)
-            ? roundToFour(Number(line.precio))
+            ? showToFour(Number(line.precio))
             : line.precio,
+        cantidad:
+          line.cantidad && Number(line.cantidad)
+            ? showToFour(Number(line.cantidad))
+            : line.cantidad,
         total: formatImporte(
           round((Number(line.cantidad) || 1) * (Number(line.precio) || 0))
         ),
