@@ -241,23 +241,6 @@ export const buildPDF = (
   printType: ImpresionType,
   payload: Document['pdfPayload']
 ) => {
-  // const encodedUrl = encodeURI(
-  //   `https://infrasistemas.sytes.net:7081/FacturacionElectronica${
-  //     // eslint-disable-next-line eqeqeq
-  //     rut == '219999820013' ? 'test' : 'multi'
-  //   }/${
-  //     printType === 'A4'
-  //       ? 'arcomprobantecfe'
-  //       : 'arcomprobantecfeetiquetadoraimpresora'
-  //   }.aspx?${payload.id},${payload.fecha},${payload.docId},${payload.docId}.pdf`
-  // );
-  // const encodedUrl = encodeURI(
-  //   `https://infrasistemas.sytes.net:7081/FacturacionElectronica${
-  //     // eslint-disable-next-line eqeqeq
-  //     rut == '219999820013' ? 'test' : 'multi'
-  //   }/arcomprobantecfeetiquetadoraimpresora.aspx?${payload.id},${payload.fecha},${payload.docId},${payload.docId}.pdf`
-  // );
-//  console.log(payload);
   let encodedUrl, encodedHash;
   if(printType !== 'A4') {
     encodedUrl = encodeURI(
