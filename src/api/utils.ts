@@ -242,7 +242,7 @@ export const buildPDF = (
   payload: Document['pdfPayload']
 ) => {
   let encodedUrl, encodedHash;
-  if(printType !== 'A4') {
+  if(printType === 'A4') {
     encodedUrl = encodeURI(
       `https://infrasistemas.sytes.net:7080/WebService.asmx/Ver_PDF?EmpresaId=${payload.id}&FECabId=${payload.docId}&FEHash=`      
     );
