@@ -244,7 +244,7 @@ export const buildPDF = (
   let encodedUrl, encodedHash;
   if(printType === 'A4') {
     encodedUrl = encodeURI(
-      `https://infrasistemas.sytes.net:7080/WebService.asmx/Ver_PDF?EmpresaId=${payload.id}&FECabId=${payload.docId}&FEHash=`      
+      `https://infrasistemas.sytes.net:7080/WebService.asmx/Ver_PDF?RUT=${rut}&FECabId=${payload.docId}&FEHash=`      
     );
     encodedHash = `${
       payload.hash ? `${encodeURIComponent(payload.hash)}` : ''
