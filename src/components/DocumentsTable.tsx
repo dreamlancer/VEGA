@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 
 function getDate() {
   let today = new Date();
-  let dd = String(today.getDate()-2).padStart(2, '0');
+  let dd = String(today.getDate()-1).padStart(2, '0');
   let mm = String(today.getMonth()+1).padStart(2, '0'); //January is 0!
   let yyyy = today.getFullYear();
   let newD = mm + '/' + dd + '/' + yyyy;
