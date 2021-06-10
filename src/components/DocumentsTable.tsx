@@ -9,6 +9,15 @@ import { buildPDF } from 'api/utils';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 
+function getDate() {
+  let today = new Date();
+  let dd = String(today.getDate()-2).padStart(2, '0');
+  let mm = String(today.getMonth()+1).padStart(2, '0'); //January is 0!
+  let yyyy = today.getFullYear();
+  let newD = mm + '/' + dd + '/' + yyyy;
+  return new Date(newD).getTime();
+}
+
 // TODO add responsive
 const columns = (type: DocumentType): ColumnsType<Document> => [
   {
@@ -87,7 +96,8 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
           locale: esPaginationLocale,
         }}
         rowClassName={(record: Document) =>
-          ['En espera', 'Error', 'Rechazado'].includes(record.estado)
+          // ['En espera', 'Error', 'Rechazado'].includes(record.estado)
+          record.estado === 'Rechazado' || record.estado === 'Error' || (record.pdfPayload.fechaGetTime < getDate() && record.estado === 'En espera')
             ? 'waiting'
             : ''
         }
@@ -104,6 +114,7 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
                   ),
         })}
       />
+      
     </TableStyle>
   );
 };

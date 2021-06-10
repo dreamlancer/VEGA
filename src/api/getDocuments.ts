@@ -7,6 +7,7 @@ import {
   tipoEstado,
   getAllDocumentsURL,
   transformDateYYYMMDD,
+  transformDateTime
 } from './utils';
 import { transformDate, formatImporte } from 'utils';
 import Axios from 'axios';
@@ -31,6 +32,7 @@ export interface Document {
     fecha: string;
     docId: string;
     hash?: string;
+    fechaGetTime: number;
   };
 }
 
@@ -97,6 +99,7 @@ const formatDocument = (data: any[], id: number): Document[] =>
         fecha: transformDateYYYMMDD(item.FEFechaAlta),
         docId: item.FECabID,
         hash: item.FEHash,
+        fechaGetTime : transformDateTime(item.FEFechaAlta)
       },
       pdf: '',
       disabled,

@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import { loginSuccess, setError } from 'store/app';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'constants/routes';
+import { setName } from 'screens/Config';
+import { updateImportEqualsDeclaration } from 'typescript';
 
 const Page = styled.div`
   width: 100vw;
@@ -50,6 +52,7 @@ export const LoginScreen = () => {
   };
 
   const doLogin = async (rut: string, password: string) => {
+
     setState({ loading: true, error: '' });
     try {
       const [
@@ -76,7 +79,16 @@ export const LoginScreen = () => {
             canExport: canExportResult,
           })
         );
-        history.push(routes.home);
+        
+        if(password == "1234" || password == "12345") {
+          setName('seguridad');
+          history.push(routes.config);
+        }
+        else {
+          setName('docs');
+          history.push(routes.home);
+        }
+        
       }
     } catch (error) {
       dispatch(setError(error));

@@ -9,6 +9,7 @@ import {
   transformDateYYYMMDD,
   WSError,
   getAllComprasURL,
+  transformDateTime,
 } from './utils';
 import { transformDate, formatImporte } from 'utils';
 import Axios from 'axios';
@@ -78,6 +79,7 @@ const formatDocument = (data: any[], id: number): Document[] =>
         id: id,
         docId: item.FECabID,
         fecha: transformDateYYYMMDD(item.FEFechaAlta),
+        fechaGetTime: transformDateTime(item.FEFechaAlta),
       },
       disabled,
     };

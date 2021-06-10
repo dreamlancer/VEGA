@@ -218,6 +218,13 @@ export const transformDateYYYMMDD = (rawDate: any) => {
   );
 };
 
+export const transformDateTime = (rawDate: any) => {
+  const myDate = new Date(rawDate.match(/\d+/)[0] * 1);
+  return (
+    myDate.getTime()
+  );
+};
+
 export const tipoEstado = (rawEstado: string) => {
   switch (rawEstado) {
     case 'ER':
