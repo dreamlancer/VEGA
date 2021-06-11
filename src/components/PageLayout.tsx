@@ -92,6 +92,11 @@ const messageTypeColor: {
   Baja: 'info',
 };
 
+let isDefaultPassword = false;
+export const setIsDefaultPassword = (value:boolean) => {
+  isDefaultPassword = value;
+}
+
 export const PageLayout = ({
   children,
   title,
@@ -110,6 +115,7 @@ export const PageLayout = ({
   );
 
   const isUserDisabled = licence === 0;
+  
 
   const doLogout = () => dispatch(logout());
 
@@ -126,25 +132,25 @@ export const PageLayout = ({
         <Logo src={collapsed ? logoMini : logo} alt="" collapsed={collapsed} />
         <Menu
           mode="inline"
-          selectedKeys={isUserDisabled ? [] : [location.pathname]}
+          selectedKeys={isUserDisabled || isDefaultPassword ? [] : [location.pathname]}
           theme="dark"
         >
-          <StyledMenuItem key={routes.home} disabled={isUserDisabled}>
+          <StyledMenuItem key={routes.home} disabled={isUserDisabled || isDefaultPassword}>
             <FileTextOutlined />
             <span>Documentos</span>
             <Link to={routes.home} />
           </StyledMenuItem>
-          <StyledMenuItem key={routes.new} disabled={isUserDisabled}>
+          <StyledMenuItem key={routes.new} disabled={isUserDisabled || isDefaultPassword}>
             <PlusOutlined />
             <span>Ingresar</span>
             <Link to={routes.new} />
           </StyledMenuItem>
-          <StyledMenuItem key={routes.agenda} disabled={isUserDisabled}>
+          <StyledMenuItem key={routes.agenda} disabled={isUserDisabled || isDefaultPassword}>
             <BookOutlined />
             <span>Agenda</span>
             <Link to={routes.agenda} />
           </StyledMenuItem>
-          <StyledMenuItem key={routes.config} disabled={isUserDisabled}>
+          <StyledMenuItem key={routes.config} disabled={isUserDisabled || isDefaultPassword}>
             <SettingOutlined />
             <span>Configuración</span>
             <Link to={routes.config} />

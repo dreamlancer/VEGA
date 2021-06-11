@@ -4,4 +4,5 @@ export const routes = {
   agenda: '/agenda',
   config: '/config',
   new: '/new',
+  informpassword: '/informpassword'
 };

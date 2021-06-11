@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { Dashboard } from 'screens/Dashboard';
 import { Agenda } from 'screens/Agenda';
 import { NewDoc } from 'screens/NewDoc';
 import { Config } from 'screens/Config';
+import { InformPassword } from 'screens/InformPassword';
 import { ErrorComponent } from 'components/ErrorComponent';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -60,6 +61,14 @@ export const App = () => {
           redirectTo={routes.login}
         >
           <Config />
+        </ConditionalRoute>
+        <ConditionalRoute
+          path={routes.informpassword}
+          condition={condition}
+          exact
+          redirectTo={routes.login}
+        >
+          <InformPassword />
         </ConditionalRoute>
       </Switch>
     </BrowserRouter>

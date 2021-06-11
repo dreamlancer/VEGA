@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { routes } from 'constants/routes';
 import { setName } from 'screens/Config';
 import { updateImportEqualsDeclaration } from 'typescript';
+import { setIsDefaultPassword } from 'components/PageLayout';
 
 const Page = styled.div`
   width: 100vw;
@@ -81,11 +82,11 @@ export const LoginScreen = () => {
         );
         
         if(password == "1234" || password == "12345") {
-          setName('seguridad');
-          history.push(routes.config);
+          setIsDefaultPassword(true);
+          history.push(routes.informpassword);
         }
         else {
-          setName('docs');
+          setIsDefaultPassword(false);
           history.push(routes.home);
         }
         
