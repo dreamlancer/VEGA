@@ -20,11 +20,21 @@ export const ChangePassword = () => {
   const handleFinish = async (values: Store) => {
     setLoading(true);
     const { password } = values;
-    if (rut) {
-      await changePass(rut, password);
-      message.success('Se cambió la contraseña con éxito');
+    if( password == "1234" || password == "12345" ) {
+      message.warning('La contraseña no puede ser tan fácil');
       form.resetFields();
       setLoading(false);
+    } else if(password.length < 4){
+      message.warning('La contraseña debe tener al menos 4 dígitos');
+      form.resetFields();
+      setLoading(false);
+    } else {
+      if (rut) {
+        await changePass(rut, password);
+        message.success('Se cambió la contraseña con éxito');
+        form.resetFields();
+        setLoading(false);
+      }
     }
   };
   return (

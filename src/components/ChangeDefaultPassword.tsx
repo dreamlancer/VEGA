@@ -29,12 +29,15 @@ export const ChangeDefaultPassword = () => {
   const handleFinish = async (values: Store) => {
     setLoading(true);
     const { password } = values;
-    if( password == "1234" || password == "12345") {
-      message.warning('Password must set without 1234, 12345');
+    if( password == "1234" || password == "12345" ) {
+      message.warning('La contraseña no puede ser tan fácil');
       form.resetFields();
       setLoading(false);
-    }
-    else {
+    } else if(password.length < 4){
+      message.warning('La contraseña debe tener al menos 4 dígitos');
+      form.resetFields();
+      setLoading(false);
+    } else {
       if (rut) {
         await changePass(rut, password);
         message.success('Se cambió la contraseña con éxito');
