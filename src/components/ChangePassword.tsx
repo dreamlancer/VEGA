@@ -47,11 +47,11 @@ export const ChangePassword = () => {
           layout="vertical"
         >
           <Typography>
-            <Typography.Title level={4}>Cambiar constraseña</Typography.Title>
+            <Typography.Title level={4}>Cambiar contraseña</Typography.Title>
           </Typography>
           <Form.Item
             name="password"
-            label="Nueva constraseña"
+            label="Nueva contraseña"
             rules={[{ required: true, message: 'Ingrese nueva contraseña' }]}
           >
             <Input.Password />

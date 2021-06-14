@@ -33,7 +33,7 @@ export const Config = () => {
             <ChangePassword />
           </Tabs.TabPane>
           <Tabs.TabPane tab="Vencimientos" key="vencimientos">
-            Vencimiento de Certificado {cert ? cert : 'Error'}
+            Vencimiento de Certificado: {cert ? cert : 'Error'}
           </Tabs.TabPane>
         </Tabs>
       </StyledTabs>
