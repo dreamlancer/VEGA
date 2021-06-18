@@ -1,7 +1,7 @@
 export const datepickerLocale = {
   lang: {
     locale: 'es_ES',
-    placeholder: 'Select date',
+    placeholder: 'Selecccione',
     rangePlaceholder: ['Fecha Inicial', 'Fecha Final'] as [string, string],
     today: 'Hoy',
     now: 'Ahora',
