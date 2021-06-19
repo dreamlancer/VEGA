@@ -26,7 +26,7 @@ import {
   onlyNumbersRegex,
 } from 'constants/regex';
 import moment from 'moment';
-import { formatImporte, round, roundToFour, showToFour} from 'utils';
+import { formatImporte, round, roundToFour, showToFour } from 'utils';
 import { getInterbancario } from 'store/app';
 import { updateRemaining, postDocumentThunk, setPostState } from 'store/docs';
 import { updatePreferences } from 'store/preferences';
@@ -79,6 +79,15 @@ const rutOCiSelector = (
     <PrefixSelect>
       <Select.Option value="RUT">RUT</Select.Option>
       <Select.Option value="CI">CI</Select.Option>
+    </PrefixSelect>
+  </Form.Item>
+);
+
+const resguardoOCiSelector = (
+  <Form.Item name="referenciaType" noStyle>
+    <PrefixSelect>
+      <Select.Option value="Referencia">Referencia</Select.Option>
+      <Select.Option value="Motivo">Motivo</Select.Option>
     </PrefixSelect>
   </Form.Item>
 );
@@ -438,6 +447,7 @@ export const DocumentForm = () => {
               subtotal: 0,
               total: 0,
               documentType: 'CI',
+              referenciaType: 'Referencia',
             }}
             hideRequiredMark
           >
@@ -595,26 +605,58 @@ export const DocumentForm = () => {
                   </Form.Item>
                   {(state.isNC || state.type === 'Resguardo') && (
                     <Form.Item
-                      name="referencia"
-                      label="Referencia"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Referencia es requerido',
-                        },
-                        {
-                          pattern: onlyNumbersRegex,
-                          validator: (rule, value) =>
-                            Number(value) < 9999999
-                              ? Promise.resolve()
-                              : Promise.reject(
-                                  'Numero tiene que ser menor que 9.999.999'
-                                ),
-                          message: 'Debe incluir solo Números',
-                        },
-                      ]}
+                      noStyle
+                      shouldUpdate={(prev, curr) =>
+                        prev.referenciaType !== curr.referenciaType
+                      }
                     >
-                      <Input type="number" maxLength={7} />
+                      {({ getFieldValue }) => {
+                        return getFieldValue('referenciaType') ===
+                          'Referencia' ? (
+                          <Form.Item
+                            name="referencia"
+                            label="Referencia"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Referencia es requerido',
+                              },
+                              {
+                                pattern: onlyNumbersRegex,
+                                validator: (rule, value) =>
+                                  Number(value) < 9999999
+                                    ? Promise.resolve()
+                                    : Promise.reject(
+                                        'Numero tiene que ser menor que 9.999.999'
+                                      ),
+                                message: 'Debe incluir solo Números',
+                              },
+                            ]}
+                          >
+                            <Input
+                              addonBefore={resguardoOCiSelector}
+                              type="number"
+                              maxLength={7}
+                            />
+                          </Form.Item>
+                        ) : (
+                          <Form.Item
+                            name="motivo"
+                            label="Motivo"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Motivo es requerido',
+                              },
+                            ]}
+                          >
+                            <Input
+                              addonBefore={resguardoOCiSelector}
+                              type="text"
+                            />
+                          </Form.Item>
+                        );
+                      }}
                     </Form.Item>
                   )}
                   <Form.Item
