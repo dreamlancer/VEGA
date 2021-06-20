@@ -26,6 +26,7 @@ export interface FormattedDocument {
   //   Lineas: any[];
   CantLineas: number;
   Referencia: string;
+  Motivo: string;
   Subtotal: string; // Formatted Decimals Neto
   Iva: string;
 }
@@ -125,6 +126,7 @@ export const formatDocument = (
     CantLineas: doc.lineas?.length || 1,
     Iva: doc.iva ? formatDecimal(doc.iva) : '0',
     Referencia: doc.referencia || '',
+    Motivo: doc.motivo || '',
     Orden_Compra: doc.ordenCompra || '',
     Moneda: doc.moneda,
     Subtotal: doc.neto ? formatDecimal(doc.neto) : '0',
@@ -159,6 +161,7 @@ const EmptyFormattedDoducment = {
   Moneda: 'UYU',
   Numero: 0,
   Referencia: '',
+  Motivo: '',
   Rut: '',
   Serie: '',
   Subtotal: 0,
