@@ -716,7 +716,7 @@ export const DocumentForm = () => {
                           <>
                             {fields.map((field, index) => (
                               <Row key={field.key}>
-                                <Col xs={24} md={6}>
+                                <Col xs={24} md={4}>
                                   <SmallFormItem
                                     className="first"
                                     label={index === 0 ? 'Cantidad' : undefined}
@@ -739,7 +739,7 @@ export const DocumentForm = () => {
                                     />
                                   </SmallFormItem>
                                 </Col>
-                                <Col flex={1} xs={24} md={6}>
+                                <Col flex={1} xs={24} md={10}>
                                   <SmallFormItem
                                     label={index === 0 ? 'Detalle' : undefined}
                                     name={[field.name, 'detalle']}
@@ -753,7 +753,7 @@ export const DocumentForm = () => {
                                     <Input placeholder="Detalle" />
                                   </SmallFormItem>
                                 </Col>
-                                <Col xs={24} span={6} md={6}>
+                                <Col xs={24} span={6} md={5}>
                                   <SmallFormItem
                                     label={
                                       index === 0
@@ -774,7 +774,7 @@ export const DocumentForm = () => {
                                     />
                                   </SmallFormItem>
                                 </Col>
-                                <Col xs={24} md={6}>
+                                <Col xs={24} md={5}>
                                   <SmallFormItem
                                     className="last"
                                     label={index === 0 ? 'Total' : undefined}
