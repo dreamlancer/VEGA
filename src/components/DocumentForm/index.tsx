@@ -26,7 +26,7 @@ import {
   onlyNumbersRegex,
 } from 'constants/regex';
 import moment from 'moment';
-import { formatImporte, round, roundToFour, showToFour } from 'utils';
+import { formatImporte, round, roundToFour, showToFour, formatDecimal, formatNewDecimal } from 'utils';
 import { getInterbancario } from 'store/app';
 import { updateRemaining, postDocumentThunk, setPostState } from 'store/docs';
 import { updatePreferences } from 'store/preferences';
@@ -364,6 +364,12 @@ export const DocumentForm = () => {
     });
     setTotales(undefined);
   };
+
+  const handleKeydownEvent = (event:any) => {
+    if(event.keyCode === 190 || event.keyCode === 110) {
+      event.preventDefault();
+    }
+  }
 
   useEffect(() => {
     if (remaining.length) {
@@ -771,6 +777,7 @@ export const DocumentForm = () => {
                                     <InputRight
                                       placeholder="Precio Unitario"
                                       type="number"
+                                      onKeyDown={handleKeydownEvent}
                                     />
                                   </SmallFormItem>
                                 </Col>
