@@ -313,7 +313,7 @@ export const DocumentForm = () => {
   const dateChecks = (date: moment.Moment): boolean => {
     const today = moment();
     if (date.isBefore(today)) {
-      return date.isBefore(today.subtract(isAdmin ? 999 : 50, 'days'));
+      return date.isBefore(today.subtract(isAdmin ? 999 : 40, 'days'));
     }
     return date.isAfter(today.add(1, 'day').startOf('day'));
   };

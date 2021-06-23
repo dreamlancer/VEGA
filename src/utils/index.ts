@@ -26,5 +26,8 @@ export function roundToFour(value: number) {
 }
 
 export function showToFour(value : number) {
-  return Math.floor((value + Number.EPSILON) * 10000) / 10000;
+  if((value + Number.EPSILON) * 10 - Math.floor((value + Number.EPSILON) * 10)  == 0) return Math.floor((value + Number.EPSILON) * 10) / 10;
+  else if((value + Number.EPSILON) * 100 - Math.floor((value + Number.EPSILON) * 100)  == 0) return Math.floor((value + Number.EPSILON) * 100) / 100;
+  else if((value + Number.EPSILON) * 1000 - Math.floor((value + Number.EPSILON) * 1000)  == 0) return Math.floor((value + Number.EPSILON) * 1000) / 1000;
+  else return Math.floor((value + Number.EPSILON) * 10000) / 10000;
 }

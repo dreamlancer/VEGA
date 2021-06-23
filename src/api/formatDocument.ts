@@ -70,7 +70,7 @@ export const formatLineas = (
     const precio = ivaInc ? Number(line.precio) / tipoIva : Number(line.precio);
     return {
       RutEmisor: formattedDocument.RutEmisor,
-      Cantidad: formatDecimal(cantidad),
+      Cantidad: formatDecimal(cantidad, 4),
       Detalle: String(line.detalle),
       Id: id,
       Linea: index,
