@@ -26,7 +26,7 @@ import {
   onlyNumbersRegex,
 } from 'constants/regex';
 import moment from 'moment';
-import { formatImporte, round, roundToFour, showToFour } from 'utils';
+import { formatImporte, round, roundToFour, showToFour, formatDecimal } from 'utils';
 import { getInterbancario } from 'store/app';
 import { updateRemaining, postDocumentThunk, setPostState } from 'store/docs';
 import { updatePreferences } from 'store/preferences';
@@ -313,7 +313,7 @@ export const DocumentForm = () => {
   const dateChecks = (date: moment.Moment): boolean => {
     const today = moment();
     if (date.isBefore(today)) {
-      return date.isBefore(today.subtract(isAdmin ? 999 : 50, 'days'));
+      return date.isBefore(today.subtract(isAdmin ? 999 : 40, 'days'));
     }
     return date.isAfter(today.add(1, 'day').startOf('day'));
   };
@@ -364,6 +364,12 @@ export const DocumentForm = () => {
     });
     setTotales(undefined);
   };
+
+  const handleKeydownEvent = (event:any) => {
+    if(event.keyCode === 190 || event.keyCode === 110) {
+      event.preventDefault();
+    }
+  }
 
   useEffect(() => {
     if (remaining.length) {
@@ -725,6 +731,7 @@ export const DocumentForm = () => {
                                     <InputRight
                                       placeholder="Cantidad"
                                       type="number"
+                                      onKeyDown={handleKeydownEvent}
                                       addonBefore={
                                         <ClickableIcon
                                           title="Eliminar"
@@ -771,6 +778,7 @@ export const DocumentForm = () => {
                                     <InputRight
                                       placeholder="Precio Unitario"
                                       type="number"
+                                      onKeyDown={handleKeydownEvent}
                                     />
                                   </SmallFormItem>
                                 </Col>
