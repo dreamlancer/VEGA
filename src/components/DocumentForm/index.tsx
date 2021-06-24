@@ -26,7 +26,7 @@ import {
   onlyNumbersRegex,
 } from 'constants/regex';
 import moment from 'moment';
-import { formatImporte, round, roundToFour, showToFour, formatDecimal, formatNewDecimal } from 'utils';
+import { formatImporte, round, roundToFour, showToFour, formatDecimal } from 'utils';
 import { getInterbancario } from 'store/app';
 import { updateRemaining, postDocumentThunk, setPostState } from 'store/docs';
 import { updatePreferences } from 'store/preferences';
@@ -731,6 +731,7 @@ export const DocumentForm = () => {
                                     <InputRight
                                       placeholder="Cantidad"
                                       type="number"
+                                      onKeyDown={handleKeydownEvent}
                                       addonBefore={
                                         <ClickableIcon
                                           title="Eliminar"
