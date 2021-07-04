@@ -27,6 +27,7 @@ export function roundToFour(value: number) {
 
 export function showToFour(value : any) {
 
+
   if(value.indexOf(',') > -1) {
     value = value.toString().replace(/\,/g, '.');
   }
@@ -36,8 +37,13 @@ export function showToFour(value : any) {
   }
   else {
     let fomatted_val;
+    if(value.lastIndexOf('0') == value.length-1) {
+      value = value.toString().replace('.', ',');
+      return value;  
+    }
     value = Number(value);
     let decimal_number = value - Math.floor(value);
+
     if((value + Number.EPSILON) * 10 - Math.floor((value + Number.EPSILON) * 10)  == 0) fomatted_val = Math.floor((value + Number.EPSILON) * 10) / 10;
     else if((value + Number.EPSILON) * 100 - Math.floor((value + Number.EPSILON) * 100)  == 0) fomatted_val = Math.floor((value + Number.EPSILON) * 100) / 100;
     else if((value + Number.EPSILON) * 1000 - Math.floor((value + Number.EPSILON) * 1000)  == 0) fomatted_val = Math.floor((value + Number.EPSILON) * 1000) / 1000;
