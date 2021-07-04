@@ -214,15 +214,16 @@ export const DocumentForm = () => {
       const lineasWithTotals = lineas.map((line) => ({
         ...line,
         precio:
-          line.precio && Number(line.precio)
-            ? showToFour(Number(line.precio))
+          line.precio 
+            ? showToFour(line.precio)
             : line.precio,
         cantidad:
-          line.cantidad && Number(line.cantidad)
-            ? showToFour(Number(line.cantidad))
+          line.cantidad 
+            ? showToFour(line.cantidad)
             : line.cantidad,
         total: formatImporte(
-          round((Number(line.cantidad) || 1) * (Number(line.precio) || 0))
+          round((Number(line.cantidad?line.cantidad.toString().replace(',', '.'):'0') || 1) 
+          * (Number(line.precio?line.precio.toString().replace(',', '.'):'0') || 0))
         ),
       }));
 
@@ -369,6 +370,10 @@ export const DocumentForm = () => {
     if(event.keyCode === 190 || event.keyCode === 110) {
       event.preventDefault();
     }
+  }
+
+  const onChangeInput = (e:any) => {
+
   }
 
   useEffect(() => {
@@ -730,8 +735,7 @@ export const DocumentForm = () => {
                                   >
                                     <InputRight
                                       placeholder="Cantidad"
-                                      type="number"
-                                      onKeyDown={handleKeydownEvent}
+                                      type="text"
                                       addonBefore={
                                         <ClickableIcon
                                           title="Eliminar"
@@ -777,8 +781,7 @@ export const DocumentForm = () => {
                                   >
                                     <InputRight
                                       placeholder="Precio Unitario"
-                                      type="number"
-                                      onKeyDown={handleKeydownEvent}
+                                      type="text"
                                     />
                                   </SmallFormItem>
                                 </Col>
