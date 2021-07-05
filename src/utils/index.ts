@@ -31,14 +31,15 @@ export function showToFour(value : any) {
   if(value.indexOf(',') > -1) {
     value = value.toString().replace(/\,/g, '.');
   }
-  if(value.indexOf('.') == value.length-1) {
-    value = value.toString().replace('.', ',');
+  if(value.lastIndexOf('.') == value.length-1) {
+    value = value.toString().replace(/\./g, ',');
     return value;
   }
   else {
     let fomatted_val;
+
     if(value.lastIndexOf('0') == value.length-1) {
-      value = value.toString().replace('.', ',');
+      value = value.toString().replace(/\./g, ',');
       return value;  
     }
     value = Number(value);
