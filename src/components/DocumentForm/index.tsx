@@ -367,13 +367,17 @@ export const DocumentForm = () => {
   };
 
   const handleKeydownEvent = (event:any) => {
-    if(event.keyCode === 190 || event.keyCode === 110) {
-      event.preventDefault();
+    if(event.keyCode === 190 || event.keyCode === 110 || event.keyCode === 188) {
+      let dot_count = event.target.value.toString().match(/\./g);
+      let comma_count = event.target.value.toString().match(/\,/g);
+      dot_count = dot_count? dot_count.length : 0;
+      comma_count = comma_count? comma_count.length : 0;
+      if(dot_count + comma_count > 0) event.preventDefault();
     }
   }
 
   const onChangeInput = (e:any) => {
-
+    console.log("target", e.target.value);
   }
 
   useEffect(() => {
@@ -736,6 +740,7 @@ export const DocumentForm = () => {
                                     <InputRight
                                       placeholder="Cantidad"
                                       type="text"
+                                      onKeyDown = {handleKeydownEvent}
                                       addonBefore={
                                         <ClickableIcon
                                           title="Eliminar"

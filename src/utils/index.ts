@@ -29,17 +29,17 @@ export function showToFour(value : any) {
 
 
   if(value.indexOf(',') > -1) {
-    value = value.toString().replaceAll(/\,/g, '.');
+    value = value.toString().replace(/\,/g, '.');
   }
   if(value.lastIndexOf('.') == value.length-1) {
-    value = value.toString().replaceAll('.', ',');
+    value = value.toString().replace(/\./g, ',');
     return value;
   }
   else {
     let fomatted_val;
 
     if(value.lastIndexOf('0') == value.length-1) {
-      value = value.toString().replaceAll('.', ',');
+      value = value.toString().replace(/\./g, ',');
       return value;  
     }
     value = Number(value);
@@ -51,6 +51,6 @@ export function showToFour(value : any) {
     else {
       fomatted_val = (Math.floor((value + Number.EPSILON) * 10000) / 10000);
     }    
-    return fomatted_val.toString().replaceAll(/\./g, ',');
+    return fomatted_val.toString().replace(/\./g, ',');
   }
 }
