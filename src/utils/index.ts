@@ -25,9 +25,31 @@ export function roundToFour(value: number) {
   return Math.round((value + Number.EPSILON) * 10000) / 10000;
 }
 
-export function showToFour(value : number) {
-  if((value + Number.EPSILON) * 10 - Math.floor((value + Number.EPSILON) * 10)  == 0) return Math.floor((value + Number.EPSILON) * 10) / 10;
-  else if((value + Number.EPSILON) * 100 - Math.floor((value + Number.EPSILON) * 100)  == 0) return Math.floor((value + Number.EPSILON) * 100) / 100;
-  else if((value + Number.EPSILON) * 1000 - Math.floor((value + Number.EPSILON) * 1000)  == 0) return Math.floor((value + Number.EPSILON) * 1000) / 1000;
-  else return (Math.floor((value + Number.EPSILON) * 10000) / 10000).toFixed(4);
+export function showToFour(value : any) {
+
+
+  if(value.indexOf(',') > -1) {
+    value = value.toString().replace(/\,/g, '.');
+  }
+  if(value.indexOf('.') == value.length-1) {
+    value = value.toString().replace('.', ',');
+    return value;
+  }
+  else {
+    let fomatted_val;
+    if(value.lastIndexOf('0') == value.length-1) {
+      value = value.toString().replace('.', ',');
+      return value;  
+    }
+    value = Number(value);
+    let decimal_number = value - Math.floor(value);
+
+    if((value + Number.EPSILON) * 10 - Math.floor((value + Number.EPSILON) * 10)  == 0) fomatted_val = Math.floor((value + Number.EPSILON) * 10) / 10;
+    else if((value + Number.EPSILON) * 100 - Math.floor((value + Number.EPSILON) * 100)  == 0) fomatted_val = Math.floor((value + Number.EPSILON) * 100) / 100;
+    else if((value + Number.EPSILON) * 1000 - Math.floor((value + Number.EPSILON) * 1000)  == 0) fomatted_val = Math.floor((value + Number.EPSILON) * 1000) / 1000;
+    else {
+      fomatted_val = (Math.floor((value + Number.EPSILON) * 10000) / 10000);
+    }    
+    return fomatted_val.toString().replace(/\./g, ',');
+  }
 }
