@@ -787,6 +787,7 @@ export const DocumentForm = () => {
                                     <InputRight
                                       placeholder="Precio Unitario"
                                       type="text"
+                                      onKeyDown = {handleKeydownEvent}
                                     />
                                   </SmallFormItem>
                                 </Col>
