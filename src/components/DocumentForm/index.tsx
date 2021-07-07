@@ -238,8 +238,8 @@ export const DocumentForm = () => {
       const ivaIncluido = impuestos === 'IVA INC';
 
       const totals = lineas.map((line) => {
-        const cantidad = Number(line.cantidad) || 1;
-        const unitario = Number(line.precio) || 0;
+        const cantidad = (Number(line.cantidad?line.cantidad.toString().replace(',', '.'):'0') || 1) ;
+        const unitario = (Number(line.precio?line.precio.toString().replace(',', '.'):'0') || 0);
         return round(cantidad * unitario);
       });
 
