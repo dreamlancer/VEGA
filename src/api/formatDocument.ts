@@ -64,10 +64,13 @@ export const formatLineas = (
   doc: any
 ): FormattedLinea[] =>
   lineas.map((line, index) => {
-    const cantidad = Number(line.cantidad) || 1;
+    const number_cantidad = (Number(line.cantidad?line.cantidad.toString().replace(',', '.'):'0') );
+    const number_precio = (Number(line.precio?line.precio.toString().replace(',', '.'):'0'));
+    const cantidad = number_cantidad || 1;
     const { impuestos, tipoIva } = doc;
     const ivaInc = impuestos === 'IVA INC';
-    const precio = ivaInc ? Number(line.precio) / tipoIva : Number(line.precio);
+    
+    const precio = ivaInc ? number_precio / tipoIva : number_precio;
     return {
       RutEmisor: formattedDocument.RutEmisor,
       Cantidad: formatDecimal(cantidad, 4),
