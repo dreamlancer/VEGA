@@ -10,13 +10,19 @@ import { StyledTabs } from 'components/StyledTabs';
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
-  const { compras, documents, state } = useSelector(
+  let { compras, documents, state } = useSelector(
     ({ docs }: RootState) => docs
   );
   useEffect(() => {
     dispatch(updateCompras());
     dispatch(updateDocuments());
   }, [dispatch]);
+
+  // console.log(documents);
+
+  // for(let i = 0 ; i < documents.length ; i ++) {
+  //   console.log(documents[i].pdfPayload.fechaGetTime);
+  // }
 
   return (
     <PageLayout title="Mis Documentos" padding={false} whiteBg={false}>
