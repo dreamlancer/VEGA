@@ -9,6 +9,7 @@ import { buildPDF } from 'api/utils';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import { datepickerLocale } from 'constants/datepickerLocale';
+import moment from 'moment';
 
 function getDate() {
   let today = new Date();
@@ -23,12 +24,10 @@ let date_start : any;
 let date_end : any;
 
 function getStartDate(){
-  console.log("date_startd", date_start);
-  return date_start ? date_start : 0;
+  return date_start ? date_start : new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 }
 
 function getEndDate(){
-  console.log("date_end", date_end);
   return date_end ? date_end : new Date().getTime();
 }
 
@@ -92,6 +91,8 @@ interface DocumentsTableProps {
   type: DocumentType;
 }
 export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
+  
+  const [dates, setDates] = useState([]);
   const { rut, impresion, start_new_date} = useSelector((state: RootState) => ({
     rut: state.app.rut,
     impresion: state.preferences.impresion,
@@ -108,7 +109,6 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
 
  const handleColseDate = ( value : any ) => {
   if(value === null) {
-    console.log("null");
     date_start = null;
     date_end = null;
     setDocs({
@@ -118,6 +118,25 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
   }
  }
 
+ const disabledDate = (current : any)=> {
+  const today = moment();
+  if (current.isBefore(today)) {
+    return current.isBefore(today.subtract(150, 'days'));
+  }
+  return current.isAfter(today.add(1, 'day').startOf('day'));
+  };
+
+  const onOpenChange = (open : any) => {
+    if (open) {
+   
+    } else {
+
+    }
+  };
+
+  const handleChange = (value:any) => {
+    setDates(value);
+  }
 
   return (
     <TableStyle pointer>
@@ -127,29 +146,28 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
           label="Fechas"
           rules={[
             {
-              // required: true,
-              // message: 'Por favor seleccione un rango de fechas',
-              // handleDateFinish()
             },
             () => ({
-              validator(rule, value: [moment.Moment, moment.Moment]) {
+              validator(rule, value: any) {
+                
                 if (!value) {
                   return Promise.reject('');
                 }
-                const [initial, end] = value;
-                date_start = new Date(initial.format('MM/DD/yyyy')).getTime();
-                date_end = new Date(end.format('MM/DD/yyyy')).getTime();
+                const initial = value;
+                date_start = new Date(new Date(initial.format('MM/DD/yyyy')).getFullYear(), new Date(initial.format('MM/DD/yyyy')).getMonth(), 1);
+                date_end = new Date(new Date(initial.format('MM/DD/yyyy')).getFullYear(), new Date(initial.format('MM/DD/yyyy')).getMonth() + 1, 0);
                 handleDateFinish();
-                // return initial.isBefore(end)
-                //   ? Promise.resolve()
-                //   : Promise.reject(
-                //       'Fecha inicial debe ser anterior a la final'
-                //     );
               },
             }),
           ]}
         >
-          <RangePicker locale={datepickerLocale} onChange={handleColseDate} format="DD/MM/YYYY" />
+            <DatePicker
+              defaultValue={moment(new Date(), 'YYYY-MM')}
+              picker="month"
+              locale={datepickerLocale}
+              disabledDate={disabledDate}
+              format="YYYY/MM"
+            />
         </Form.Item>
       </Form>
       <Table
