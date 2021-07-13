@@ -167,6 +167,9 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
               locale={datepickerLocale}
               disabledDate={disabledDate}
               format="MM/YYYY"
+              popupStyle={{
+                fontSize: "13px",
+              }}
             />
         </Form.Item>
       </Form>
