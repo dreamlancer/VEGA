@@ -121,7 +121,7 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
  const disabledDate = (current : any)=> {
   const today = moment();
   if (current.isBefore(today)) {
-    return current.isBefore(today.subtract(150, 'days'));
+    return current.isBefore(today.subtract(300, 'days'));
   }
   return current.isAfter(today.add(1, 'day').startOf('day'));
   };
@@ -143,7 +143,7 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
       <Form>
         <Form.Item
           name="dates"
-          label="Fechas"
+          label="Seleccione el mes:"
           rules={[
             {
             },
@@ -166,7 +166,7 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
               picker="month"
               locale={datepickerLocale}
               disabledDate={disabledDate}
-              format="YYYY/MM"
+              format="MM/YYYY"
             />
         </Form.Item>
       </Form>
