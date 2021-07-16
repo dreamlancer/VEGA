@@ -49,7 +49,7 @@ export const getAllDocuments = async (
       responseType: 'json',
     }
   ).catch((error) => {
-    throw new WSError('Ultimos_Documentos');
+    throw new WSError('Documentos');
   });
 
   return formatDocument(data, id);
