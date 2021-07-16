@@ -40,6 +40,7 @@ import {
   SelectTransporte,
   SelectModVenta,
 } from './Selects';
+import { departamentos } from 'constants/departamentos';
 
 const { TextArea } = Input;
 
@@ -376,6 +377,12 @@ export const DocumentForm = () => {
     }
   }
 
+  const handleKeyBlockdownEvent = (event:any) => {
+    if(event.keyCode == 55 && event.shiftKey) {
+      event.preventDefault();
+    }
+  }
+
   useEffect(() => {
     if (remaining.length) {
       const tipo = remaining[0];
@@ -477,6 +484,7 @@ export const DocumentForm = () => {
                     ]}
                   >
                     <Input
+                      onKeyDown = {handleKeyBlockdownEvent}
                       suffix={
                         <ClickableIcon
                           title="Agenda"
@@ -522,7 +530,13 @@ export const DocumentForm = () => {
                       },
                     ]}
                   >
-                    <Input maxLength={30} />
+                    <Select placeholder="Seleccione Departamento">
+                      {departamentos.map((d) => (
+                        <Select.Option key={d} value={d}>
+                          {d}
+                        </Select.Option>
+                      ))}
+                    </Select>
                   </Form.Item>
                   {state.type === 'Exportación' && <SelectPais />}
                   {state.type === 'Exportación' && (
@@ -762,7 +776,10 @@ export const DocumentForm = () => {
                                       },
                                     ]}
                                   >
-                                    <Input placeholder="Detalle" />
+                                    <Input 
+                                      placeholder="Detalle" 
+                                      onKeyDown = {handleKeyBlockdownEvent}
+                                    />
                                   </SmallFormItem>
                                 </Col>
                                 <Col xs={24} span={6} md={5}>
@@ -925,7 +942,10 @@ export const DocumentForm = () => {
               <Row justify="space-between">
                 <Col xl={12} sm={24}>
                   <Form.Item name="observaciones" label="Observaciones">
-                    <TextArea autoSize={{ minRows: 4 }} />
+                    <TextArea 
+                      autoSize={{ minRows: 4 }} 
+                      onKeyDown = {handleKeyBlockdownEvent}
+                    />
                   </Form.Item>
                   {state.type !== 'Resguardo' && state.type !== 'Exportación' && (
                     <Form.Item name="ordenCompra" label="Orden de compra">

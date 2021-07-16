@@ -28,6 +28,7 @@ const prefixSelector = (
   </Form.Item>
 );
 
+
 export type NamePath = string | number | (string | number)[];
 export interface FieldData {
   touched?: boolean;
@@ -58,6 +59,12 @@ export const ClientForm = ({
 
     form.resetFields();
   };
+
+  const handleKeyBlockdownEvent = (event:any) => {
+    if(event.keyCode == 55 && event.shiftKey) {
+      event.preventDefault();
+    }
+  }
 
   const handleFieldsChange = (changedFields: FieldData[]) => {
     if (
@@ -108,7 +115,7 @@ export const ClientForm = ({
             label="Nombre"
             rules={[{ required: true, message: 'Nombre es requerido' }]}
           >
-            <Input />
+            <Input onKeyDown = {handleKeyBlockdownEvent}/>
           </Form.Item>
           <Form.Item
             name="ciudad"
