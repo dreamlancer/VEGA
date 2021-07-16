@@ -1,6 +1,5 @@
 import { Document } from './getDocuments';
 import {
-  getComprasURL,
   tipoEstado,
   tipoCFE,
   tipoMoneda,
@@ -13,21 +12,6 @@ import {
 } from './utils';
 import { transformDate, formatImporte } from 'utils';
 import Axios from 'axios';
-
-export const getCompras = async (
-  rut: string,
-  id: number,
-  isAdmin: boolean,
-  isAccountant: boolean
-) => {
-  const { data } = await Axios.get(getComprasURL(rut, isAdmin, isAccountant), {
-    timeout: 5000,
-    responseType: 'json',
-  }).catch((error) => {
-    throw new WSError('Ultimos_Documentos_Externos');
-  });
-  return formatDocument(data, id);
-};
 
 export const getAllCompras = async (
   rut: string,

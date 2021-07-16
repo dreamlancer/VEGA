@@ -47,7 +47,12 @@ export const updateCompras = createAsyncThunk(
     } = getState() as RootState;
     if (rut != null && id != null) {
       try {
-        const compras = await api.getCompras(rut, id, isAdmin, isAccountant);
+        const compras = await api.getAllCompras(
+          rut, 
+          id, 
+          isAccountant, 
+          moment(new Date(2020, 0, 1)).format('DD-MM-yyyy'),
+          moment(new Date()).format('DD-MM-yyyy'),);
         dispatch(setCompras(compras));
       } catch (error) {
         dispatch(setError(error));

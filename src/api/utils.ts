@@ -70,17 +70,6 @@ export const getAllDocumentsURL = (
     },${desde},${hasta}/`
   );
 
-export const getComprasURL = (
-  rut: string,
-  isAdmin: boolean,
-  isAccountant: boolean
-) =>
-  encodeURI(
-    `https://infrasistemas.sytes.net:7080/api/Ultimos_Documentos_Externos/${rut},${
-      isAdmin ? 'Sí' : 'No'
-    },${isAccountant ? 'Sí' : 'No'}/`
-  );
-
 export const getAllComprasURL = (
   rut: string,
   isAccountant: boolean,
