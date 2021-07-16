@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Empty, DatePicker, Form } from 'antd';
 
-import { Document } from 'api';
+import { Document, getAllCompras, getAllDocuments } from 'api';
 import { ColumnsType } from 'antd/lib/table';
 import { TableStyle } from './TableStyle';
 import { esPaginationLocale } from 'constants/paginationLocale';
 import { buildPDF } from 'api/utils';
 import { RootState } from 'store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { datepickerLocale } from 'constants/datepickerLocale';
 import moment from 'moment';
+import { Store } from 'antd/lib/form/interface';
+import { updateDocuments, updateCompras, setDocuments } from 'store/docs';
+
 
 function getDate() {
   let today = new Date();
@@ -90,6 +93,12 @@ interface DocumentsTableProps {
   documents: Document[];
   type: DocumentType;
 }
+
+interface State {
+  type: 'Ventas' | 'Compras';
+  dates: [moment.Moment, moment.Moment];
+}
+
 export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
   
   const [dates, setDates] = useState([]);
@@ -98,24 +107,19 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
     impresion: state.preferences.impresion,
     start_new_date : 0
   }));
- const [docs, setDocs] = useState<DocumentsTableProps>();
+ let docs = useSelector(
+    ({ docs }: RootState) => docs
+  );
+ const dispatch = useDispatch();
 
- const handleDateFinish = () => {
-  setDocs({
-    documents,
-    type
-  });
- }
-
- const handleColseDate = ( value : any ) => {
-  if(value === null) {
-    date_start = null;
-    date_end = null;
-    setDocs({
-      documents,
-      type
-    });
-  }
+ const handleDateFinish = async () => {
+  const docs = await getAllDocuments(
+    rut as string,
+    id as number,
+    isAccountant,
+    moment(date_start).format('DD-MM-yyyy'),
+    moment(date_end).format('DD-MM-yyyy'));
+  dispatch(setDocuments(docs));
  }
 
  const disabledDate = (current : any)=> {
@@ -126,17 +130,16 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
   return current.isAfter(today.add(1, 'day').startOf('day'));
   };
 
-  const onOpenChange = (open : any) => {
-    if (open) {
-   
-    } else {
+  const { canExport, id, isAccountant } = useSelector(
+    ({ app }: RootState) => app
+  );
 
-    }
-  };
-
-  const handleChange = (value:any) => {
-    setDates(value);
-  }
+  const [{ isLoading }, setState] = useState<{
+    isLoading: boolean;
+    error?: boolean;
+  }>({
+    isLoading: false,
+  });      
 
   return (
     <TableStyle pointer>

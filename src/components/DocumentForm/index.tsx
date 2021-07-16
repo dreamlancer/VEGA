@@ -376,10 +376,6 @@ export const DocumentForm = () => {
     }
   }
 
-  const onChangeInput = (e:any) => {
-    console.log("target", e.target.value);
-  }
-
   useEffect(() => {
     if (remaining.length) {
       const tipo = remaining[0];

@@ -58,17 +58,6 @@ export const post = async <T extends {}>({
     });
 };
 
-export const getDocumentsURL = (
-  rut: string,
-  isAdmin: boolean,
-  isAccountant: boolean
-) =>
-  encodeURI(
-    `https://infrasistemas.sytes.net:7080/api/Ultimos_Documentos/${rut},${
-      isAdmin ? 'Sí' : 'No'
-    },${isAccountant ? 'Sí' : 'No'}/`
-  );
-
 export const getAllDocumentsURL = (
   rut: string,
   isAccountant: boolean,

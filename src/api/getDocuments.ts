@@ -1,6 +1,5 @@
 import { WSError } from 'api/utils';
 import {
-  getDocumentsURL,
   tipoCFE,
   tipoMoneda,
   tipoPago,
@@ -35,24 +34,6 @@ export interface Document {
     fechaGetTime: number;
   };
 }
-
-export const getDocuments = async (
-  rut: string,
-  id: number,
-  isAdmin: boolean,
-  isAccountant: boolean
-) => {
-  const { data } = await Axios.get(
-    getDocumentsURL(rut, isAdmin, isAccountant),
-    {
-      timeout: 5000,
-      responseType: 'json',
-    }
-  ).catch((error) => {
-    throw new WSError('Ultimos_Documentos');
-  });
-  return formatDocument(data, id);
-};
 
 export const getAllDocuments = async (
   rut: string,

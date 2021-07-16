@@ -18,12 +18,6 @@ export const Dashboard = () => {
     dispatch(updateDocuments());
   }, [dispatch]);
 
-  // console.log(documents);
-
-  // for(let i = 0 ; i < documents.length ; i ++) {
-  //   console.log(documents[i].pdfPayload.fechaGetTime);
-  // }
-
   return (
     <PageLayout title="Mis Documentos" padding={false} whiteBg={false}>
       <StyledTabs>

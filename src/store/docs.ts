@@ -2,6 +2,7 @@ import { postHeader, postLineas, validar } from './../api/postDocument';
 import { SliceState } from './preferences';
 import { RootState } from 'store';
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 import * as api from 'api';
 import {
@@ -63,11 +64,12 @@ export const updateDocuments = createAsyncThunk(
     } = getState() as RootState;
     if (rut != null && id != null) {
       try {
-        const documents = await api.getDocuments(
+        const documents = await api.getAllDocuments(
           rut,
           id,
-          isAdmin,
-          isAccountant
+          isAccountant,
+          moment(new Date(2020, 0, 1)).format('DD-MM-yyyy'),
+          moment(new Date()).format('DD-MM-yyyy'),
         );
         dispatch(setDocuments(documents));
       } catch (error) {
