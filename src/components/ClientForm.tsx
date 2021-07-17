@@ -61,7 +61,7 @@ export const ClientForm = ({
   };
 
   const handleKeyBlockdownEvent = (event:any) => {
-    if(event.keyCode == 55 && event.shiftKey) {
+    if(event.key == '&') {
       event.preventDefault();
     }
   }
