@@ -140,6 +140,7 @@ export const DocumentForm = () => {
     error: docs.error,
     loading: docs.state === 'LOADING' || app.interbancario === null,
   }));
+  console.log(tipoIva);
 
   const [totales, setTotales] = useState<Totales>();
 
@@ -247,6 +248,8 @@ export const DocumentForm = () => {
       const linesTotal = totals.reduce((acc, l) => acc + l, 0);
 
       const subtotal = ivaIncluido ? linesTotal / tipoIva : linesTotal;
+
+      console.log("--", tipoIva);
 
       const neto = subtotal * (1 - descuento / 100);
 
@@ -452,7 +455,7 @@ export const DocumentForm = () => {
               impuestos,
             
               formaPago: 'Contado',
-              tipoIva: tipoIva === '0%' ? 1.0 : '10%' ? 1.1 : 1.22,
+              tipoIva: tipoIva === '0%' ? 1.0 : tipoIva === '22%' ? 1.22 : 1.1,
               tipo: 0,
               serie: remaining[0].serie,
               numero: remaining[0].desde + remaining[0].utilizados,
@@ -838,7 +841,7 @@ export const DocumentForm = () => {
                   {...formItemLayout}
                   initialValues={{
                     moneda: moneda === 'Dólares' ? 'USD' : 'UYU',
-                    iva: tipoIva === '0%' ? 1.0 : '10%' ? 1.1 : 1.22,
+                    tipoIva: tipoIva === '0%' ? 1.0 : tipoIva === '22%' ? 1.22 : 1.11,
                   }}
                   hideRequiredMark
                 >
