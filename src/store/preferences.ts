@@ -17,24 +17,28 @@ const initialState: PreferencesState = {
   moneda: 'Dólares',
   state: 'LOADING',
   impresion: 'A4',
+  tipoIva : '22%'
 };
 
 export type ImpuestosType = '+IVA' | 'IVA INC';
 export type MonedaType = 'Dólares' | 'Pesos';
 
 export type SliceState = 'READY' | 'LOADING' | 'ERROR';
+export type IvaType = '0%' | '5%' | '22%';
 
 interface PreferencesState {
   moneda: MonedaType;
   impuestos: ImpuestosType;
   impresion: ImpresionType;
   state: SliceState;
+  tipoIva : IvaType;
 }
 
 export const postPreferences = (
   moneda: string,
   impuestos: string,
-  impresion: ImpresionType
+  impresion: ImpresionType,
+  tipoIva: string
 ) => async (
   dispatch: ThunkDispatch<{}, {}, AnyAction>,
   getState: () => RootState
@@ -47,6 +51,7 @@ export const postPreferences = (
         api.postMoneda(rut, moneda),
         api.postImpuestos(rut, impuestos),
         api.postImpresion(rut, impresion),
+        api.postIva(rut, tipoIva)
       ]);
       message.success('Se guardaron sus preferencias.');
       dispatch(updatePreferences());
@@ -64,16 +69,18 @@ export const updatePreferences = createAsyncThunk(
     } = getState() as RootState;
     if (rut != null) {
       try {
-        const [moneda, impuestos, impresion] = await Promise.all([
+        const [moneda, impuestos, impresion, tipoIva] = await Promise.all([
           api.getMoneda(rut),
           api.getImpuestos(rut),
           api.getImpresion(rut),
+          api.getIva(rut)
         ]);
         dispatch(
-          setPreferences({ moneda, impuestos, impresion } as {
+          setPreferences({ moneda, impuestos, impresion, tipoIva} as {
             moneda: MonedaType;
             impuestos: ImpuestosType;
             impresion: ImpresionType;
+            tipoIva: IvaType;
           })
         );
       } catch (error) {
@@ -93,11 +100,13 @@ const preferencesSlice = createSlice({
         moneda: MonedaType;
         impuestos: ImpuestosType;
         impresion: ImpresionType;
+        tipoIva: IvaType;
       }>
     ) {
       state.moneda = action.payload.moneda;
       state.impuestos = action.payload.impuestos;
       state.impresion = action.payload.impresion;
+      state.tipoIva = action.payload.tipoIva;
       state.state = 'READY';
     },
     setState(state, action: PayloadAction<SliceState>) {

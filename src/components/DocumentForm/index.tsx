@@ -127,7 +127,7 @@ export interface Line {
 export const DocumentForm = () => {
   const {
     remaining,
-    preferences: { impuestos, moneda },
+    preferences: { impuestos, moneda, tipoIva},
     isAdmin,
     loading,
     postState,
@@ -450,8 +450,9 @@ export const DocumentForm = () => {
             initialValues={{
               moneda: moneda === 'Dólares' ? 'USD' : 'UYU',
               impuestos,
+            
               formaPago: 'Contado',
-              tipoIva: 1.22,
+              tipoIva: tipoIva === '0%' ? 1.0 : '10%' ? 1.1 : 1.22,
               tipo: 0,
               serie: remaining[0].serie,
               numero: remaining[0].desde + remaining[0].utilizados,
@@ -837,6 +838,7 @@ export const DocumentForm = () => {
                   {...formItemLayout}
                   initialValues={{
                     moneda: moneda === 'Dólares' ? 'USD' : 'UYU',
+                    iva: tipoIva === '0%' ? 1.0 : '10%' ? 1.1 : 1.22,
                   }}
                   hideRequiredMark
                 >

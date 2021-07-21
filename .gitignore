@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+VEGA_07-15-21.zip
+
 # dependencies
 /node_modules
 /.pnp

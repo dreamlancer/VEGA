@@ -12,6 +12,10 @@ const urlGetImpresion =
   'https://infrasistemas.sytes.net:7080/WebService.asmx?op=Tipo_Impresi%c3%b3n';
 const urlPostImpresion =
   'https://infrasistemas.sytes.net:7080/WebService.asmx?op=Cambio_Tipo_Impresi%c3%b3n';
+const urlGetIva =
+  'https://infrasistemas.sytes.net:7080/WebService.asmx?op=IVA_Preferencial';
+const urlPostIva =
+  'https://infrasistemas.sytes.net:7080/WebService.asmx?op=Cambiar_IVA_Preferencial';
 
 export const getMoneda = async (rut: string) => {
   const sr = `<?xml version="1.0" encoding="utf-8"?>
@@ -142,4 +146,47 @@ export const postImpresion = async (rut: string, impresion: ImpresionType) => {
   };
 
   return post(postImpresionWS);
+};
+
+export const getIva = async (rut: string) => {
+  const sr = `<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <IVA_Preferencial xmlns="http://infrasistemas.sytes.net:7080/">
+        <RUT>${rut}</RUT>
+      </IVA_Preferencial>
+    </soap:Body>
+  </soap:Envelope>`;
+
+  const getIvaWS: WebService<string> = {
+    url: urlGetIva,
+    name: 'IVA_Preferencial',
+    resultSelector: 'IVA_PreferencialResult',
+    sr,
+    transform: (res) => res,
+  };
+
+  return post(getIvaWS);
+};
+
+export const postIva = async (rut: string, iva: string) => {
+  const sr = `<?xml version="1.0" encoding="utf-8"?>
+    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+    <Cambio_IVA_Preferencial xmlns="http://infrasistemas.sytes.net:7080/">
+    <RUT>${rut}</RUT>
+    <IVA>${iva}</IVA>
+    </Cambio_IVA_Preferencial>
+    </soap:Body>
+    </soap:Envelope>`;
+
+  const getIvaWS: WebService<string> = {
+    url: urlPostIva,
+    name: 'Cambio_IVA_Preferencial',
+    resultSelector: 'Cambio_IVA_PreferencialResult',
+    sr,
+    transform: (res) => res,
+  };
+
+  return post(getIvaWS);
 };
