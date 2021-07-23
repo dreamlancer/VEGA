@@ -25,7 +25,7 @@ export const Planes =  () => {
 
     return (
         <>
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style = {{margin : '20px 0px'}}>
                 <Col className="gutter-row" span={8}>
                     <div>
                         <Section1>
@@ -35,11 +35,11 @@ export const Planes =  () => {
                                 <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
                             ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
                         </Section1>
-                        <Section3>
+                        <Section3 style = {{padding: '65px 0px'}}>
                             <ul style = {{textAlign : 'left'}}>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 50</Text></List>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 10</Text></List>
-                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas y Notas de Crédito.</Text></List>
+                                <List style = {{paddingRight : '10px'}}><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas y Notas de Crédito.</Text></List>
                             </ul>  
                         </Section3>
                     </div>
@@ -57,7 +57,7 @@ export const Planes =  () => {
                             <ul style = {{textAlign : 'left'}}>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 100</Text></List>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 25</Text></List>
-                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas, Notas de Crédito, eResguardos y eFacturas de Exportación.</Text></List>
+                                <List style = {{paddingRight : '10px'}}><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas, Notas de Crédito, eResguardos y eFacturas de Exportación.</Text></List>
                             </ul> 
                         </Section3>
                     </div>
@@ -75,7 +75,7 @@ export const Planes =  () => {
                             <ul style = {{textAlign : 'left'}}>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 200</Text></List>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 50</Text></List>
-                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas, Notas de Crédito, eResguardos y eFacturas de Exportación.</Text></List>
+                                <List style = {{paddingRight : '10px'}}><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas, Notas de Crédito, eResguardos y eFacturas de Exportación.</Text></List>
                             </ul> 
                         </Section3>
                     </div>
