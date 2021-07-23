@@ -13,13 +13,15 @@ export const Preferences = () => {
   const { moneda, impuestos, impresion, tipoIva, state } = useSelector(
     ({ preferences }: RootState) => preferences
   );
+
+  
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(updatePreferences());
   }, [dispatch]);
-
+  console.log(">>>>", moneda, impuestos, impresion, tipoIva);
   useEffect(() => {
     form.resetFields();
   }, [moneda, impuestos, impresion, tipoIva, form]);

@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 import { Preferences } from 'components/Preferences';
 import { RemainingTable } from 'components/Remaining';
 import { ChangePassword } from 'components/ChangePassword';
+import { Planes } from 'components/Planes';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { StyledTabs } from 'components/StyledTabs';
@@ -34,6 +35,9 @@ export const Config = () => {
           </Tabs.TabPane>
           <Tabs.TabPane tab="Vencimientos" key="vencimientos">
             Vencimiento de Certificado: {cert ? cert : 'Error'}
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Planes" key="planes">
+            <Planes />
           </Tabs.TabPane>
         </Tabs>
       </StyledTabs>

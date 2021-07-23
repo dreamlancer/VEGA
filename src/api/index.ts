@@ -16,3 +16,4 @@ export * from './providers';
 export * from './isAccountant';
 export * from './canExport';
 export * from './getAvailableDocs';
+export * from './getServiceType';
