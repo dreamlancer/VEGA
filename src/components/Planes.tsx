@@ -32,13 +32,14 @@ export const Planes =  () => {
                             <HomeTwoTone twoToneColor="#52c41a" style={basic_icon_style} />
                             <Title level={2} style={{fontWeight : 'bold', margin : '0px', color: 'white'}}>Plan Básico</Title>
                             { type == 'Básico' ? (
-                                <Title level={4} style={sub_header_style}>Usted tiene contratado este</Title>
+                                <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
                             ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
                         </Section1>
                         <Section3>
                             <ul style = {{textAlign : 'left'}}>
-                                <List><Text style = {{textAlign : 'left', fontSize : '20px'}}>Límite Documentos : 50</Text></List>
-                                <List><Text style = {{textAlign : 'left', fontSize : '20px'}}>Límite de Clientes : 10</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 50</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 10</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas y Notas de Crédito.</Text></List>
                             </ul>  
                         </Section3>
                     </div>
@@ -49,13 +50,14 @@ export const Planes =  () => {
                             <StarTwoTone twoToneColor="#0a32c4" style={standard_icon_style} />
                             <Title level={2} style={{fontWeight : 'bold', margin : '0px', color: 'white'}}>Plan Estándar</Title>
                             { type == 'Estándar' ? (
-                                <Title level={4} style={sub_header_style}>Usted tiene contratado este</Title>
+                                <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
                             ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
                         </Section1>
                         <Section3>
                             <ul style = {{textAlign : 'left'}}>
-                                <List><Text style = {{textAlign : 'left', fontSize : '20px'}}>Límite Documentos : 100</Text></List>
-                                <List><Text style = {{textAlign : 'left', fontSize : '20px'}}>Límite de Clientes : 25</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 100</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 25</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas, Notas de Crédito, eResguardos y eFacturas de Exportación.</Text></List>
                             </ul> 
                         </Section3>
                     </div>
@@ -66,18 +68,22 @@ export const Planes =  () => {
                             <CrownTwoTone twoToneColor="#c4b31a" style={premium_icon_style} />
                             <Title level={2} style={{fontWeight : 'bold', margin : '0px', color: 'white'}}>Plan Premium</Title>
                             { type == 'Premium' ? (
-                                <Title level={4} style={sub_header_style}>Usted tiene contratado este</Title>
+                                <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
                             ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
                         </Section1>
                         <Section3>
                             <ul style = {{textAlign : 'left'}}>
-                                <List><Text style = {{textAlign : 'left', fontSize : '20px'}}>Límite Documentos : 200</Text></List>
-                                <List><Text style = {{textAlign : 'left', fontSize : '20px'}}>Límite de Clientes : 50</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 200</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 50</Text></List>
+                                <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> eTickets, eFacturas, Notas de Crédito, eResguardos y eFacturas de Exportación.</Text></List>
                             </ul> 
                         </Section3>
                     </div>
                 </Col>
             </Row>
+            <ul style = {{textAlign : 'left'}}>
+            <List><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}>¿Tal vez precises más funciones?</Text><Text style = {{textAlign : 'left', fontSize : '16px'}}> ¿Te gustaría llevar estados de cuenta? ¿Control de Stock? Puede ser que VEGA no sea la solución más adecuada para tí. Pero no te preocupes, porque tenemos más soluciones!</Text></List>
+            </ul> 
         </>
     )
 }
@@ -128,7 +134,7 @@ const style = {
 };
 
 const basic_icon_style = {
-    fontSize: '50px', 
+    fontSize: '40px', 
     margin : '16px',
     padding : '15px',
     height: '80px',
@@ -139,7 +145,7 @@ const basic_icon_style = {
 }
 
 const standard_icon_style = {
-    fontSize: '50px', 
+    fontSize: '40px', 
     margin : '16px',
     padding : '15px',
     height: '80px',
@@ -150,7 +156,7 @@ const standard_icon_style = {
 }
 
 const premium_icon_style = {
-    fontSize: '50px', 
+    fontSize: '40px', 
     margin : '16px',
     padding : '15px',
     height: '80px',
@@ -166,6 +172,7 @@ const header_style = {
 }
 
 const sub_header_style = {
+    fontSize: '18px', 
     font: 'bold',
     margin: '0px',
     borderBottom : '1px solid #3575D3',
