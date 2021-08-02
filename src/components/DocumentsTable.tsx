@@ -195,8 +195,7 @@ export const DocumentsTable = ({ documents, type }: DocumentsTableProps) => {
             : ''
         }
         columns={columns(type)}
-        dataSource={documents.filter(document => document.pdfPayload.fechaGetTime > getStartDate() &&
-          document.pdfPayload.fechaGetTime < getEndDate())}
+        dataSource={documents}
         onRow={(record) => ({
           onClick:
             type === 'Purchases'
