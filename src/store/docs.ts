@@ -52,7 +52,7 @@ export const updateCompras = createAsyncThunk(
           id, 
           isAccountant, 
           moment(new Date(2020, 0, 1)).format('DD-MM-yyyy'),
-          moment(new Date()).format('DD-MM-yyyy'),);
+          moment(new Date()).format('DD-MM-yyyy'));
         dispatch(setCompras(compras));
       } catch (error) {
         dispatch(setError(error));
@@ -73,8 +73,8 @@ export const updateDocuments = createAsyncThunk(
           rut,
           id,
           isAccountant,
-          moment(new Date(2020, 0, 1)).format('DD-MM-yyyy'),
-          moment(new Date()).format('DD-MM-yyyy'),
+          moment(new Date(new Date().getFullYear(), new Date().getMonth(), 1)).format('DD-MM-yyyy'),
+          moment(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)).format('DD-MM-yyyy'),
         );
         dispatch(setDocuments(documents));
       } catch (error) {
