@@ -93,7 +93,7 @@ const resguardoOCiSelector = (
   </Form.Item>
 );
 
-export type DocTypes = 'Ticket' | 'Factura' | 'Resguardo' | 'Exportación';
+export type DocTypes = 'Ticket' | 'Factura' | 'Resguardo' | 'Exportación' | 'Remito';
 
 interface State {
   type: DocTypes;
@@ -140,7 +140,6 @@ export const DocumentForm = () => {
     error: docs.error,
     loading: docs.state === 'LOADING' || app.interbancario === null,
   }));
-  console.log(tipoIva);
 
   const [totales, setTotales] = useState<Totales>();
 
@@ -158,7 +157,6 @@ export const DocumentForm = () => {
     showAgenda: false,
     isNC: false,
   });
-
   const setAgenda = (value: boolean) =>
     setState((prev) => ({ ...prev, showAgenda: value }));
 
@@ -184,6 +182,8 @@ export const DocumentForm = () => {
           newType = 'Factura';
         } else if (tipo.tipo.match(/resguardo/gi)) {
           newType = 'Resguardo';
+        } else if (tipo.tipo.match(/remito/gi)) {
+          newType = 'Remito';
         } else if (tipo.tipo.match(/export/gi)) {
           newType = 'Exportación';
           forms.bigForm.setFieldsValue({ tipoIva: 1.0, moneda: 'USD' });
@@ -248,8 +248,6 @@ export const DocumentForm = () => {
       const linesTotal = totals.reduce((acc, l) => acc + l, 0);
 
       const subtotal = ivaIncluido ? linesTotal / tipoIva : linesTotal;
-
-      console.log("--", tipoIva);
 
       const neto = subtotal * (1 - descuento / 100);
 
@@ -709,7 +707,7 @@ export const DocumentForm = () => {
                       </Form.Item>
                     </Input.Group>
                   </Form.Item>
-                  {state.type !== 'Resguardo' && (
+                  {(state.type !== 'Resguardo' && state.type !== 'Remito') && (
                     <>
                       <Form.Item name="formaPago" label="Forma de Pago">
                         <Select>
@@ -721,6 +719,16 @@ export const DocumentForm = () => {
                         <Select>
                           <Option value="+ IVA">+ IVA</Option>
                           <Option value="IVA INC">IVA INC</Option>
+                        </Select>
+                      </Form.Item>
+                    </>
+                  )}
+                  {state.type === 'Remito' && (
+                    <>
+                      <Form.Item name="remitoTipo" label="Tipo">
+                        <Select>
+                          <Option value="interno">Interno</Option>
+                          <Option value="venta">Venta</Option>
                         </Select>
                       </Form.Item>
                     </>
@@ -801,11 +809,22 @@ export const DocumentForm = () => {
                                       },
                                     ]}
                                   >
+                                    {state.type === 'Remito' ? (
+                                      <InputRight
+                                        placeholder="Precio Unitario"
+                                        type="text"
+                                        onKeyDown = {handleKeydownEvent}
+                                        disabled
+                                      />
+                                    )
+                                  :
+                                  (
                                     <InputRight
                                       placeholder="Precio Unitario"
                                       type="text"
                                       onKeyDown = {handleKeydownEvent}
                                     />
+                                  )}
                                   </SmallFormItem>
                                 </Col>
                                 <Col xs={24} md={5}>
