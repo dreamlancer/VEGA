@@ -197,7 +197,7 @@ export const DocumentForm = () => {
         forms.bigForm.setFieldsValue({
           serie: tipo.serie,
           numero: tipo.desde + tipo.utilizados,
-          documentType: newType === 'Resguardo' ? 'RUT' : 'CI',
+          documentType: newType === 'Ticket' ? 'CI' : 'RUT',
         });
       }
     }
@@ -451,7 +451,7 @@ export const DocumentForm = () => {
             initialValues={{
               moneda: moneda === 'Dólares' ? 'USD' : 'UYU',
               impuestos,
-            
+              remitoTipo: 'Interno',
               formaPago: 'Contado',
               tipoIva: tipoIva === '0%' ? 1.0 : tipoIva === '22%' ? 1.22 : 1.1,
               tipo: 0,
@@ -571,7 +571,7 @@ export const DocumentForm = () => {
                       <Input />
                     </Form.Item>
                   )}
-                  {(state.type === 'Resguardo' || state.type === 'Ticket') && (
+                  {(state.type === 'Resguardo' || state.type === 'Ticket' || state.type === 'Remito') && (
                     <Form.Item
                       noStyle
                       shouldUpdate={(prev, curr) =>
