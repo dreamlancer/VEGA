@@ -35,7 +35,7 @@ export const Planes =  () => {
                                 <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
                             ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
                         </Section1>
-                        <Section3 style = {{padding: '65px 0px'}}>
+                        <Section3 style = {{padding: '50px 0px 98px 0px'}}>
                             <ul style = {{textAlign : 'left'}}>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Documentos:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 50</Text></List>
                                 <List><Text style = {{textAlign : 'left', fontSize : '16px'}}>Límite de Clientes y Proveedores:</Text><Text style = {{textAlign : 'left', fontSize : '16px', fontWeight : 'bold'}}> 10</Text></List>
@@ -51,7 +51,7 @@ export const Planes =  () => {
                             <Title level={2} style={{fontWeight : 'bold', margin : '0px', color: 'white'}}>Plan Estándar</Title>
                             { type == 'Estándar' ? (
                                 <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
-                            ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
+                            ) : <Title level={4} style={{margin:'0px', padding:'28px'}}></Title>}
                         </Section1>
                         <Section3>
                             <ul style = {{textAlign : 'left'}}>
@@ -69,7 +69,7 @@ export const Planes =  () => {
                             <Title level={2} style={{fontWeight : 'bold', margin : '0px', color: 'white'}}>Plan Premium</Title>
                             { type == 'Premium' ? (
                                 <Title level={4} style={sub_header_style}>(usted tiene contratado este)</Title>
-                            ) : <Title level={4} style={{margin:'0px', padding:'30px'}}></Title>}
+                            ) : <Title level={4} style={{margin:'0px', padding:'28px'}}></Title>}
                         </Section1>
                         <Section3>
                             <ul style = {{textAlign : 'left'}}>
