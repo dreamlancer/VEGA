@@ -184,6 +184,8 @@ export const DocumentForm = () => {
           newType = 'Resguardo';
         } else if (tipo.tipo.match(/remito/gi)) {
           newType = 'Remito';
+          forms.bigForm.setFieldsValue({ tipoIva: 1.0, moneda: 'USD' });
+          // tipo.tipoIva = '0%'
         } else if (tipo.tipo.match(/export/gi)) {
           newType = 'Exportación';
           forms.bigForm.setFieldsValue({ tipoIva: 1.0, moneda: 'USD' });
@@ -287,6 +289,9 @@ export const DocumentForm = () => {
           cfe: tipo.CFE,
           lineas,
         };
+        console.log("payload", payload);
+        console.log("lineas", lineas);
+        console.log("type", state.type);
         dispatch(postDocumentThunk({ doc: payload, lineas, type: state.type }));
       } else {
         const resguardoFields = await forms.resguardo.validateFields();
@@ -451,7 +456,7 @@ export const DocumentForm = () => {
             initialValues={{
               moneda: moneda === 'Dólares' ? 'USD' : 'UYU',
               impuestos,
-              remitoTipo: 'Interno',
+              TipoRemito: 'Interno',
               formaPago: 'Contado',
               tipoIva: tipoIva === '0%' ? 1.0 : tipoIva === '22%' ? 1.22 : 1.1,
               tipo: 0,
@@ -725,7 +730,7 @@ export const DocumentForm = () => {
                   )}
                   {state.type === 'Remito' && (
                     <>
-                      <Form.Item name="remitoTipo" label="Tipo">
+                      <Form.Item name="TipoRemito" label="Tipo">
                         <Select>
                           <Option value="interno">Interno</Option>
                           <Option value="venta">Venta</Option>
@@ -804,7 +809,7 @@ export const DocumentForm = () => {
                                     name={[field.name, 'precio']}
                                     rules={[
                                       {
-                                        required: true,
+                                        required: state.type !== 'Remito' ? true : false,
                                         message: 'Precio unitario es requerido',
                                       },
                                     ]}
@@ -817,14 +822,14 @@ export const DocumentForm = () => {
                                         disabled
                                       />
                                     )
-                                  :
-                                  (
-                                    <InputRight
-                                      placeholder="Precio Unitario"
-                                      type="text"
-                                      onKeyDown = {handleKeydownEvent}
-                                    />
-                                  )}
+                                    :
+                                    (
+                                      <InputRight
+                                        placeholder="Precio Unitario"
+                                        type="text"
+                                        onKeyDown = {handleKeydownEvent}
+                                      />
+                                    )}
                                   </SmallFormItem>
                                 </Col>
                                 <Col xs={24} md={5}>
@@ -1017,7 +1022,7 @@ export const DocumentForm = () => {
                         <InputRight
                           addonBefore={
                             <SelectIva
-                              disabled={state.type === 'Exportación'}
+                              disabled={state.type === 'Exportación'||state.type === 'Remito'}
                             />
                           }
                           disabled
@@ -1028,7 +1033,7 @@ export const DocumentForm = () => {
                           disabled
                           addonBefore={
                             <SelectCurrency
-                              disabled={state.type === 'Exportación'}
+                              disabled={state.type === 'Exportación'||state.type === 'Remito'}
                             />
                           }
                           value={formatImporte(totales?.total)}

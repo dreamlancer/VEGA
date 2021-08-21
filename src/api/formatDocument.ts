@@ -145,6 +145,7 @@ export const formatDocument = (
       ? Number(doc.modalidadVenta)
       : undefined,
     FEIDDocViaTransp: doc.transporte ? Number(doc.transporte) : undefined,
+    TipoRemito: doc.TipoRemito || '',
   });
 
 const EmptyFormattedDoducment = {
