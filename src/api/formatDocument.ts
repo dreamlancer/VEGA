@@ -42,12 +42,13 @@ export interface FormattedLinea {
   IVA: Iva | '';
 }
 
-type Iva = '22%' | '10%' | '0%' | '0% E';
+type Iva = '22%' | '10%' | '0%' | '0% E' | 'eBoleta';
 
-const transformIva = (iva: number, isExport?: boolean): Iva | '' => {
+const transformIva = (iva: number, type: string): Iva | '' => {
+  if(type === 'Remito') return 'eBoleta';
   switch (iva) {
     case 1.0:
-      return isExport ? '0% E' : '0%';
+      return type === 'Exportación' ? '0% E' : '0%';
     case 1.1:
       return '10%';
     case 1.22:
@@ -132,7 +133,7 @@ export const formatDocument = (
     Orden_Compra: doc.ordenCompra || '',
     Moneda: doc.moneda,
     Subtotal: doc.neto ? formatDecimal(doc.neto) : '0',
-    TipoIva: transformIva(doc.tipoIva, type === 'Exportación'),
+    TipoIva: transformIva(doc.tipoIva, type),
     Total: doc.total ? formatDecimal(doc.total) : '0',
     Observaciones: doc.observaciones,
     Descuento: formatDecimal(doc.descuento),
