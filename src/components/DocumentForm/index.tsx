@@ -537,13 +537,18 @@ export const DocumentForm = () => {
                       },
                     ]}
                   >
-                    <Select placeholder="Seleccione Departamento">
-                      {departamentos.map((d) => (
-                        <Select.Option key={d} value={d}>
-                          {d}
-                        </Select.Option>
-                      ))}
-                    </Select>
+                    {
+                      state.type === 'Exportación' ?
+                        <Input />
+                        :
+                        <Select placeholder="Seleccione Departamento">
+                        {departamentos.map((d) => (
+                          <Select.Option key={d} value={d}>
+                            {d}
+                          </Select.Option>
+                        ))}
+                      </Select>  
+                    }
                   </Form.Item>
                   {state.type === 'Exportación' && <SelectPais />}
                   {state.type === 'Exportación' && (
