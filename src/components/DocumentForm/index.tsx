@@ -983,7 +983,7 @@ export const DocumentForm = () => {
                   </Form.Item>
                   {state.type !== 'Resguardo' && state.type !== 'Exportación' && (
                     <Form.Item name="ordenCompra" label="Orden de compra">
-                      <Input />
+                      <Input maxLength={50} />
                     </Form.Item>
                   )}
                   {state.type === 'Exportación' && (
