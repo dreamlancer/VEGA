@@ -12,6 +12,7 @@ import {
   Tooltip,
   Typography,
   Result,
+  Modal
 } from 'antd';
 import { datepickerLocale } from 'constants/datepickerLocale';
 import { PlusOutlined, DeleteOutlined, BookOutlined } from '@ant-design/icons';
@@ -41,6 +42,8 @@ import {
   SelectModVenta,
 } from './Selects';
 import { departamentos } from 'constants/departamentos';
+
+const confirm = Modal.confirm;
 
 const { TextArea } = Input;
 
@@ -283,16 +286,28 @@ export const DocumentForm = () => {
         const { lineas } = await forms.lines.validateFields();
         const tipo = remaining[values.tipo];
 
-        const payload = {
+        let payload = {
           ...values,
           ...totales,
           cfe: tipo.CFE,
           lineas,
         };
-        console.log("payload", payload);
+        console.log("payload", values.documentType);
         console.log("lineas", lineas);
         console.log("type", state.type);
-        dispatch(postDocumentThunk({ doc: payload, lineas, type: state.type }));
+        
+        if(state.type === 'Ticket' && values.documentType ==='RUT') {
+          confirm({
+            title: 'Do you want to continue?',
+            onOk() {
+              dispatch(postDocumentThunk({ doc: payload, lineas, type: state.type }));
+            },
+            onCancel() {},
+          });
+        }
+        else {
+          dispatch(postDocumentThunk({ doc: payload, lineas, type: state.type }));
+        }
       } else {
         const resguardoFields = await forms.resguardo.validateFields();
 
@@ -578,7 +593,7 @@ export const DocumentForm = () => {
                         },
                       ]}
                     >
-                      <Input />
+                      <Input maxLength={12}/>
                     </Form.Item>
                   )}
                   {(state.type === 'Resguardo' || state.type === 'Ticket' || state.type === 'Remito') && (
@@ -602,7 +617,7 @@ export const DocumentForm = () => {
                               },
                             ]}
                           >
-                            <Input addonBefore={rutOCiSelector} />
+                            <Input addonBefore={rutOCiSelector} maxLength={12}/>
                           </Form.Item>
                         ) : (
                           <Form.Item
@@ -619,6 +634,7 @@ export const DocumentForm = () => {
                             <Input
                               addonBefore={rutOCiSelector}
                               placeholder="ej: 4.283.298-4"
+                              maxLength={12}
                             />
                           </Form.Item>
                         );
