@@ -299,6 +299,8 @@ export const DocumentForm = () => {
         if(state.type === 'Ticket' && values.documentType ==='RUT') {
           confirm({
             title: 'Está por emitir un eTicket con RUT ¿Seguro que desea continuar?',
+            okText: 'Continuar',
+            cancelText: 'Cancelar',
             onOk() {
               dispatch(postDocumentThunk({ doc: payload, lineas, type: state.type }));
             },
