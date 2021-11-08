@@ -15,7 +15,7 @@ export const ErrorComponent = ({ name, message }: ErrorComponentProps) => {
         subTitle={message}
         extra={
           <Col>
-            <Row>
+            <Row justify="center">
               Verifique su conexión a internet.
             </Row>
             <Row>
