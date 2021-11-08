@@ -16,6 +16,9 @@ export const ErrorComponent = ({ name, message }: ErrorComponentProps) => {
         extra={
           <Col>
             <Row>
+              Verifique su conexión a internet.
+            </Row>
+            <Row>
               Ante cualquier duda comunicate al 4532 8662. Infra Sistemas.
             </Row>
             <Row justify="center">
